@@ -3,36 +3,36 @@
 @tailwind utilities;
 
 /* ===================================================
-   GLOBAL DESIGN SYSTEM
+   DESIGN SYSTEM — Warm Editorial Dark
 =================================================== */
 
 :root {
-  /* Brand palette */
-  --brand-primary: hsl(248, 75%, 55%);
-  --brand-secondary: hsl(280, 65%, 50%);
-  --brand-glow: hsl(248, 75%, 55%, 0.4);
+  /* Brand — warm amber, not purple */
+  --brand-primary: hsl(38, 92%, 50%);
+  --brand-light: hsl(38, 96%, 65%);
+  --brand-dim: hsl(38, 60%, 30%);
 
-  /* Surfaces */
-  --surface-bg: hsl(228, 20%, 7%);
-  --surface-1: hsl(228, 18%, 10%);
-  --surface-2: hsl(228, 16%, 14%);
-  --surface-3: hsl(228, 14%, 18%);
-  --surface-4: hsl(228, 12%, 22%);
+  /* Surfaces — warm near-black, no blue tint */
+  --surface-bg:  #0e0e0e;
+  --surface-1:   #141414;
+  --surface-2:   #1c1c1c;
+  --surface-3:   #242424;
+  --surface-4:   #2e2e2e;
 
   /* Text */
-  --text-primary: hsl(228, 20%, 94%);
-  --text-secondary: hsl(228, 10%, 65%);
-  --text-muted: hsl(228, 8%, 45%);
+  --text-primary:   #f2f0ed;
+  --text-secondary: #a09d99;
+  --text-muted:     #636059;
 
   /* Accents */
-  --accent-green: hsl(158, 64%, 52%);
-  --accent-amber: hsl(43, 96%, 56%);
-  --accent-red: hsl(0, 72%, 58%);
+  --accent-green:  hsl(152, 56%, 45%);
+  --accent-amber:  hsl(38, 92%, 50%);
+  --accent-red:    hsl(4, 70%, 55%);
 
-  /* Borders */
-  --border-subtle: hsl(228, 14%, 18%);
-  --border-default: hsl(228, 12%, 24%);
-  --border-strong: hsl(228, 10%, 32%);
+  /* Borders — crisp, no glow */
+  --border-subtle:  #1e1e1e;
+  --border-default: #282828;
+  --border-strong:  #383838;
 }
 
 /* ===================================================
@@ -61,36 +61,18 @@ body {
 }
 
 /* ===================================================
-   SCROLLBAR STYLING
+   SCROLLBAR
 =================================================== */
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--surface-1);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--surface-4);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--border-strong);
-}
-
-/* ===================================================
-   SELECTION
-=================================================== */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--surface-bg); }
+::-webkit-scrollbar-thumb { background: var(--surface-4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
 
 ::selection {
-  background: hsl(248, 75%, 55%, 0.3);
+  background: hsl(38, 92%, 50%, 0.25);
   color: var(--text-primary);
 }
-
-/* ===================================================
-   FOCUS
-=================================================== */
 
 :focus-visible {
   outline: 2px solid var(--brand-primary);
@@ -99,103 +81,80 @@ body {
 }
 
 /* ===================================================
-   TYPOGRAPHY UTILITIES
+   COMPONENTS
 =================================================== */
 
 @layer components {
+
+  /* --- Gradient text (amber, not purple) --- */
   .text-gradient {
-    background: linear-gradient(135deg, hsl(248, 80%, 70%) 0%, hsl(280, 70%, 65%) 100%);
+    background: linear-gradient(120deg, hsl(38, 96%, 62%) 0%, hsl(20, 90%, 60%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .text-gradient-green {
-    background: linear-gradient(135deg, hsl(158, 64%, 52%) 0%, hsl(180, 60%, 50%) 100%);
+    background: linear-gradient(120deg, hsl(152, 56%, 50%) 0%, hsl(170, 50%, 45%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* ========================
-     GLASS MORPHISM CARDS
-  ======================== */
+  /* --- Cards — solid, no blur --- */
   .glass {
-    background: hsl(228, 18%, 10%, 0.6);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid hsl(228, 14%, 22%, 0.6);
+    background: var(--surface-1);
+    border: 1px solid var(--border-default);
   }
 
   .glass-card {
-    background: hsl(228, 16%, 12%, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid hsl(228, 14%, 22%);
-    border-radius: 16px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background: var(--surface-1);
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
 
   .glass-card:hover {
-    border-color: hsl(248, 40%, 40%);
-    box-shadow: 0 0 0 1px hsl(248, 40%, 40%, 0.2),
-                0 20px 60px hsl(228, 30%, 5%, 0.6);
+    border-color: var(--border-strong);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
   }
 
-  /* ========================
-     GLOW EFFECTS
-  ======================== */
-  .glow-brand {
-    box-shadow: 0 0 20px hsl(248, 75%, 55%, 0.4), 0 0 60px hsl(248, 75%, 55%, 0.1);
-  }
-
-  .glow-green {
-    box-shadow: 0 0 20px hsl(158, 64%, 52%, 0.4);
-  }
+  /* --- No glow effects --- */
+  .glow-brand { box-shadow: 0 2px 12px rgba(0,0,0,0.5); }
+  .glow-green  { box-shadow: 0 2px 12px rgba(0,0,0,0.5); }
 
   /* ========================
      BUTTONS
   ======================== */
+
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 12px 24px;
-    background: linear-gradient(135deg, hsl(248, 75%, 55%) 0%, hsl(268, 70%, 52%) 100%);
-    color: white;
+    padding: 10px 20px;
+    background: var(--brand-primary);
+    color: #0e0e0e;
     font-weight: 600;
-    font-size: 15px;
-    border-radius: 12px;
+    font-size: 14px;
+    border-radius: 8px;
     border: none;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
     text-decoration: none;
     white-space: nowrap;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-primary::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, white 0%, transparent 100%);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  .btn-primary:hover::before {
-    opacity: 0.08;
+    letter-spacing: -0.01em;
   }
 
   .btn-primary:hover {
+    background: var(--brand-light);
     transform: translateY(-1px);
-    box-shadow: 0 8px 25px hsl(248, 75%, 55%, 0.5);
+    box-shadow: 0 6px 20px hsl(38, 92%, 50%, 0.3);
   }
 
   .btn-primary:active {
     transform: translateY(0);
+    box-shadow: none;
   }
 
   .btn-secondary {
@@ -203,40 +162,41 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 11px 24px;
+    padding: 9px 20px;
     background: transparent;
     color: var(--text-primary);
     font-weight: 500;
-    font-size: 15px;
-    border-radius: 12px;
+    font-size: 14px;
+    border-radius: 8px;
     border: 1px solid var(--border-default);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
     text-decoration: none;
     white-space: nowrap;
+    letter-spacing: -0.01em;
   }
 
   .btn-secondary:hover {
     background: var(--surface-2);
     border-color: var(--border-strong);
-    transform: translateY(-1px);
   }
 
   .btn-ghost {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 8px 16px;
+    gap: 6px;
+    padding: 7px 12px;
     background: transparent;
     color: var(--text-secondary);
     font-weight: 500;
-    font-size: 14px;
-    border-radius: 8px;
+    font-size: 13px;
+    border-radius: 6px;
     border: none;
     cursor: pointer;
     transition: all 0.15s ease;
     text-decoration: none;
+    letter-spacing: -0.01em;
   }
 
   .btn-ghost:hover {
@@ -249,97 +209,101 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 11px 24px;
-    background: hsl(0, 72%, 58%, 0.15);
-    color: hsl(0, 72%, 70%);
+    padding: 9px 20px;
+    background: hsl(4, 70%, 55%, 0.12);
+    color: hsl(4, 70%, 68%);
     font-weight: 600;
-    font-size: 15px;
-    border-radius: 12px;
-    border: 1px solid hsl(0, 72%, 58%, 0.3);
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid hsl(4, 70%, 55%, 0.25);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
   }
 
   .btn-danger:hover {
-    background: hsl(0, 72%, 58%, 0.25);
-    border-color: hsl(0, 72%, 58%, 0.5);
+    background: hsl(4, 70%, 55%, 0.2);
+    border-color: hsl(4, 70%, 55%, 0.4);
   }
 
   /* ========================
      INPUT FIELDS
   ======================== */
+
   .input-field {
     width: 100%;
-    padding: 12px 16px;
+    padding: 10px 14px;
     background: var(--surface-2);
     color: var(--text-primary);
     border: 1px solid var(--border-default);
-    border-radius: 10px;
-    font-size: 15px;
+    border-radius: 8px;
+    font-size: 14px;
     font-family: inherit;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
     outline: none;
+    letter-spacing: -0.01em;
   }
 
-  .input-field::placeholder {
-    color: var(--text-muted);
-  }
+  .input-field::placeholder { color: var(--text-muted); }
 
   .input-field:focus {
     border-color: var(--brand-primary);
-    box-shadow: 0 0 0 3px hsl(248, 75%, 55%, 0.15);
+    box-shadow: 0 0 0 3px hsl(38, 92%, 50%, 0.12);
   }
 
   /* ========================
      BADGES
   ======================== */
+
   .badge {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 12px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .badge-brand {
-    background: hsl(248, 75%, 55%, 0.15);
-    color: hsl(248, 80%, 75%);
-    border: 1px solid hsl(248, 75%, 55%, 0.25);
+    background: hsl(38, 92%, 50%, 0.12);
+    color: hsl(38, 96%, 65%);
+    border: 1px solid hsl(38, 92%, 50%, 0.2);
   }
 
   .badge-green {
-    background: hsl(158, 64%, 52%, 0.15);
-    color: hsl(158, 64%, 65%);
-    border: 1px solid hsl(158, 64%, 52%, 0.25);
+    background: hsl(152, 56%, 45%, 0.12);
+    color: hsl(152, 56%, 60%);
+    border: 1px solid hsl(152, 56%, 45%, 0.22);
   }
 
   .badge-amber {
-    background: hsl(43, 96%, 56%, 0.15);
-    color: hsl(43, 96%, 66%);
-    border: 1px solid hsl(43, 96%, 56%, 0.25);
+    background: hsl(38, 92%, 50%, 0.12);
+    color: hsl(38, 96%, 65%);
+    border: 1px solid hsl(38, 92%, 50%, 0.22);
   }
 
   .badge-red {
-    background: hsl(0, 72%, 58%, 0.15);
-    color: hsl(0, 72%, 70%);
-    border: 1px solid hsl(0, 72%, 58%, 0.25);
+    background: hsl(4, 70%, 55%, 0.12);
+    color: hsl(4, 70%, 68%);
+    border: 1px solid hsl(4, 70%, 55%, 0.22);
   }
 
   /* ========================
-     SECTION WRAPPERS
+     LAYOUT
   ======================== */
+
   .container-page {
-    max-width: 1280px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 24px;
   }
 
   /* ========================
-     LOADING STATES
+     SKELETON / LOADING
   ======================== */
+
   .skeleton {
     background: linear-gradient(
       90deg,
@@ -349,44 +313,47 @@ body {
     );
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
-    border-radius: 8px;
+    border-radius: 6px;
   }
 
   /* ========================
-     NOISE TEXTURE
+     NOISE TEXTURE OVERLAY
   ======================== */
+
   .noise::after {
     content: '';
     position: absolute;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.35;
   }
 }
 
 /* ===================================================
-   ANIMATED GRADIENT BACKGROUND
+   BACKGROUND — minimal, no big gradient orbs
 =================================================== */
+
 .gradient-bg {
-  background:
-    radial-gradient(ellipse 80% 60% at 50% -10%, hsl(248, 60%, 25%, 0.4) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 50%, hsl(280, 50%, 20%, 0.3) 0%, transparent 60%),
-    var(--surface-bg);
+  background: var(--surface-bg);
+  /* Very subtle warm vignette */
+  background-image:
+    radial-gradient(ellipse 70% 50% at 50% -5%, hsl(38, 60%, 12%, 0.35) 0%, transparent 65%);
 }
 
 /* ===================================================
-   AUDIO VISUALIZER BARS
+   AUDIO VISUALIZER
 =================================================== */
+
 .audio-bar {
-  width: 4px;
+  width: 3px;
   border-radius: 2px;
   transform-origin: bottom center;
   transition: background-color 0.3s ease;
 }
 
 .audio-bar.active {
-  background: linear-gradient(to top, hsl(248, 75%, 55%), hsl(280, 65%, 65%));
+  background: linear-gradient(to top, hsl(38, 92%, 50%), hsl(38, 96%, 70%));
 }
 
 .audio-bar.idle {
@@ -396,9 +363,8 @@ body {
 /* ===================================================
    SCORE RING
 =================================================== */
-.score-ring-track {
-  stroke: var(--surface-3);
-}
+
+.score-ring-track { stroke: var(--surface-3); }
 
 .score-ring-fill {
   stroke: url(#score-gradient);
@@ -409,32 +375,73 @@ body {
 /* ===================================================
    TRANSCRIPT MESSAGES
 =================================================== */
-.transcript-message {
-  animation: slideUp 0.3s ease-out;
-}
 
-.transcript-message.ai {
-  align-self: flex-start;
-}
-
-.transcript-message.user {
-  align-self: flex-end;
-}
+.transcript-message { animation: slideUp 0.25s ease-out; }
+.transcript-message.ai  { align-self: flex-start; }
+.transcript-message.user { align-self: flex-end; }
 
 /* ===================================================
    PAGE TRANSITIONS
 =================================================== */
-.page-enter {
-  animation: fadeIn 0.4s ease-out;
-}
+
+.page-enter { animation: fadeIn 0.3s ease-out; }
 
 /* ===================================================
    MARQUEE
 =================================================== */
+
 @keyframes marquee {
-  0% { transform: translateX(0); }
+  0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 .animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+/* ===================================================
+   SHIMMER KEYFRAME
+=================================================== */
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ===================================================
+   FADE / SLIDE ANIMATIONS
+=================================================== */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===================================================
+   DIVIDER LINES
+=================================================== */
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border-default);
+}
+
+/* ===================================================
+   UTILITY — shadow-glow alias (neutral now)
+=================================================== */
+
+.shadow-glow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* ===================================================
+   GRADIENT BRAND (button background alias)
+=================================================== */
+
+.bg-gradient-brand {
+  background: var(--brand-primary);
 }
