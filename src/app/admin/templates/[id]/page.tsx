@@ -15,6 +15,7 @@ import {
   ExternalLink,
   Clock,
   Star,
+  Pencil,
 } from "lucide-react";
 import {
   collection,
@@ -154,19 +155,28 @@ export default function TemplateResultsPage({
               </p>
             </div>
 
-            {/* Shareable link box */}
-            <div className="glass-card p-4 min-w-0 sm:max-w-sm">
-              <p className="text-xs text-[var(--text-muted)] mb-2">Applicant link</p>
-              <div className="flex items-center gap-2">
-                <code className="text-xs text-brand-300 truncate flex-1 bg-surface-2 px-2 py-1.5 rounded-lg">
-                  {applyUrl}
-                </code>
-                <button
-                  onClick={copyLink}
-                  className="w-8 h-8 rounded-lg bg-brand-600/20 border border-brand-500/30 flex items-center justify-center text-brand-300 hover:bg-brand-600/30 transition-colors flex-shrink-0"
-                >
-                  {copied ? <Check size={14} className="text-accent-green" /> : <Copy size={14} />}
-                </button>
+            {/* Shareable link box + edit */}
+            <div className="flex flex-col gap-2">
+              <Link
+                href={`/admin/templates/${templateId}/edit`}
+                className="btn-ghost text-sm w-full justify-center"
+              >
+                <Pencil size={14} />
+                Edit Template
+              </Link>
+              <div className="glass-card p-4 min-w-0 sm:max-w-sm">
+                <p className="text-xs text-[var(--text-muted)] mb-2">Applicant link</p>
+                <div className="flex items-center gap-2">
+                  <code className="text-xs text-brand-300 truncate flex-1 bg-surface-2 px-2 py-1.5 rounded-lg">
+                    {applyUrl}
+                  </code>
+                  <button
+                    onClick={copyLink}
+                    className="w-8 h-8 rounded-lg bg-brand-600/20 border border-brand-500/30 flex items-center justify-center text-brand-300 hover:bg-brand-600/30 transition-colors flex-shrink-0"
+                  >
+                    {copied ? <Check size={14} className="text-accent-green" /> : <Copy size={14} />}
+                  </button>
+                </div>
               </div>
             </div>
           </div>

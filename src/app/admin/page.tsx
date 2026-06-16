@@ -16,6 +16,7 @@ import {
   Copy,
   Check,
   ExternalLink,
+  Pencil,
 } from "lucide-react";
 import { collection, query, where, getDocs, doc, updateDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -275,6 +276,15 @@ export default function AdminDashboard() {
                     {t.status === "active" ? <ToggleRight size={14} /> : <ToggleLeft size={14} />}
                     {t.status === "active" ? "Active" : "Inactive"}
                   </button>
+
+                  {/* Edit */}
+                  <Link
+                    href={`/admin/templates/${t.id}/edit`}
+                    className="w-8 h-8 rounded-lg bg-surface-3 border border-[var(--border-default)] flex items-center justify-center text-[var(--text-muted)] hover:text-brand-300 transition-colors"
+                    title="Edit template"
+                  >
+                    <Pencil size={14} />
+                  </Link>
 
                   {/* Copy link */}
                   <button
