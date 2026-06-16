@@ -1,0 +1,24 @@
+# AI Voice Interview - Git Ignore
+node_modules/
+.next/
+.env.local
+.env.*.local
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
