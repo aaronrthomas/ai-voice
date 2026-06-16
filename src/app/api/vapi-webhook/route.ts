@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { adminDb } from "@/lib/firebase-admin";
 
-// Vapi sends webhook events when call events occur
-// Configure this URL in your Vapi Dashboard → Webhooks
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
   try {
+    // If Firebase Admin isn't configured, acknowledge and return
+    if (!adminDb) {
+      return NextResponse.json({ ok: true });
+    }
+
     const body = await req.json();
     const { type, call } = body;
 

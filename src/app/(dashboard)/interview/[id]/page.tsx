@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { Suspense, use, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Mic, ArrowLeft, Loader2 } from "lucide-react";
@@ -14,8 +14,8 @@ interface InterviewPageProps {
   params: Promise<{ id: string }>;
 }
 
-export default function InterviewPage({ params }: InterviewPageProps) {
-  const { id: interviewId } = use(params);
+// Inner component using useSearchParams — must be inside Suspense
+function InterviewContent({ interviewId }: { interviewId: string }) {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session") || "";
   const { user } = useAuth();
@@ -111,5 +111,19 @@ export default function InterviewPage({ params }: InterviewPageProps) {
         />
       </div>
     </div>
+  );
+}
+
+export default function InterviewPage({ params }: InterviewPageProps) {
+  const { id: interviewId } = use(params);
+
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen gradient-bg flex items-center justify-center">
+        <Loader2 size={40} className="animate-spin text-brand-400" />
+      </div>
+    }>
+      <InterviewContent interviewId={interviewId} />
+    </Suspense>
   );
 }

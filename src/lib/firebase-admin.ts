@@ -1,21 +1,23 @@
 import * as admin from "firebase-admin";
 
-// Prevent duplicate initialization in Next.js dev mode
-if (!admin.apps.length) {
-  const privateKey = process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(
-    /\\n/g,
-    "\n"
-  );
+// Only initialize if credentials are available (not during static build)
+const privateKey = process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\\n/g, "\n");
+const clientEmail = process.env.FIREBASE_ADMIN_CLIENT_EMAIL;
+const projectId = process.env.FIREBASE_ADMIN_PROJECT_ID;
 
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId: process.env.FIREBASE_ADMIN_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
-      privateKey,
-    }),
-  });
+if (!admin.apps.length) {
+  if (privateKey && clientEmail && projectId) {
+    admin.initializeApp({
+      credential: admin.credential.cert({ projectId, clientEmail, privateKey }),
+    });
+  } else {
+    // Initialize with project ID only (no admin operations will work,
+    // but the module won't crash during build/static generation)
+    admin.initializeApp({ projectId: projectId || "placeholder" });
+  }
 }
 
-export const adminAuth = admin.auth();
-export const adminDb = admin.firestore();
+// Lazy getters — only usable at request time when credentials are present
+export const adminAuth = admin.apps[0] ? admin.auth() : null;
+export const adminDb = admin.apps[0] ? admin.firestore() : null;
 export default admin;

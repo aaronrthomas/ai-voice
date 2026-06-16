@@ -207,7 +207,7 @@ Guidelines:
         stopTimer();
       });
 
-      // Start the call with assistant override
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await vapi.start({
         model: {
           provider: "openai",
@@ -226,7 +226,7 @@ Guidelines:
         backchannelingEnabled: true,
         backgroundDenoisingEnabled: true,
         name: "VoicePrep AI Interviewer",
-      });
+      } as any);
     } catch (err) {
       console.error("Failed to start Vapi call:", err);
       const msg = err instanceof Error ? err.message : "Failed to start interview";
